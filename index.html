@@ -98,7 +98,16 @@ yesBtn.addEventListener("click", () => {
   confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }});
 });
 </script>
+noBtn.addEventListener("mouseover", () => {
+  const i = Math.floor(Math.random() * (window.innerWidth - 100));
+  const j = Math.floor(Math.random() * (window.innerHeight - 50));
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = i + "px";
+  noBtn.style.top = j + "px";
+});
 
 </body>
 </html>
+
 
