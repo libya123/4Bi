@@ -1,67 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>For You ❤️</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .bounce {
-            animation: bounce 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-    </style>
-</head>
-
-<body class="bg-pink-100 flex items-center justify-center h-screen">
-
-<div class="text-center bg-white p-10 rounded-xl shadow-xl w-[500px]">
-
-    <h1 class="text-3xl font-bold mb-6">Do you love me? 😍</h1>
-
-    <!-- IMAGE -->
-    <img id="imageDisplay"
-         src="image1.gif"
-         class="mx-auto rounded-lg h-[300px] object-cover bounce mb-6" />
-
-    <!-- BUTTONS -->
-    <div class="space-x-4">
-        <button onclick="showLove()"
-                class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
-            Yes 💖
-        </button>
-
-        <button onclick="changeImage()"
-                class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600">
-            No 😢
-        </button>
-    </div>
-
-    <p id="message" class="mt-6 text-xl font-semibold text-pink-600"></p>
-
-</div>
-
 <script>
-    const imagePaths = [
-        "image1.gif",
-        "image2.gif",
-        "image3.gif",
-        "image4.gif"
-    ];
+const yesBtn = document.getElementById("yesButton");
+const noBtn = document.getElementById("noButton");
+const img = document.getElementById("imageDisplay");
+const text = document.getElementById("valentineQuestion");
+const buttons = document.getElementById("responseButtons");
 
-    let index = 0;
+let count = 0;
 
-    function changeImage() {
-        index = (index + 1) % imagePaths.length;
-        document.getElementById("imageDisplay").src = imagePaths[index];
-    }
+// Images for "No" clicks
+const noImages = [
+  "noimage1.jpg", // replace with your actual URLs
+  "noimage2.jpg",
+  "noimage3.jpg",
+  "noimage4.jpg",
+  "noimage5.jpg",
+  "noimage6.jpg"
+];
 
-    function showLove() {
-        document.getElementById("message").innerText = "Yayyy!! ❤️ I love you too Bi!";
-    }
+// Special "Yes" image after 6 "No"s
+const yesImage1 = "yesimage1.jpg"; // replace with your actual URL
+
+// Text prompts for "No" button
+const noTexts = [
+  "No",
+  "Are you sure?",
+  "Please reconsider 🥺",
+  "Don't break my heart 💔",
+  "I’m gonna cry...",
+  "Okay fine… think again?"
+];
+
+noBtn.addEventListener("click", () => {
+  if (count < noImages.length) {
+    img.src = noImages[count];
+    noBtn.textContent = noTexts[count];
+    yesBtn.style.transform = `scale(${1 + count * 0.25})`;
+    count++;
+  } else {
+    // After 6th "No", show special yes image
+    img.src = yesImage1;
+    text.textContent = "I knew you'd say yes! ❤️🥳";
+    buttons.style.display = "none";
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  img.src = gifs[6]; // original yes GIF
+  text.textContent = "Yayyyy!! ❤️🥳,Smart choice Bibin!";
+  buttons.style.display = "none";
+  confetti({
+    particleCount: 150,
+    spread: 80,
+    origin: { y: 0.6 }
+  });
+});
 </script>
-
-</body>
-</html>
