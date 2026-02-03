@@ -1,4 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+  background: linear-gradient(180deg,#ffd0e5 0%,#ffe8f2 36%,#ffffff 100%);
+}
+</style>
+</head>
+
+<body class="flex items-center justify-center h-screen">
+
+<div class="flex flex-col items-center">
+  <img id="imageDisplay"
+  src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+  class="rounded-md h-[300px]"/>
+
+  <h2 id="valentineQuestion"
+  class="text-4xl font-bold italic text-[#bd1e59] my-4">
+  Will you be my Valentine?
+  </h2>
+
+  <div class="flex gap-4" id="responseButtons">
+    <button id="yesButton"
+    class="bg-green-500 text-white px-6 py-3 rounded-md text-xl">
+    Yes
+    </button>
+
+    <button id="noButton"
+    class="bg-red-500 text-white px-6 py-3 rounded-md text-xl">
+    No
+    </button>
+  </div>
+</div>
 
 <script>
 const yesButton = document.getElementById('yesButton');
@@ -10,23 +50,23 @@ const responseButtons = document.getElementById('responseButtons');
 let noClickCount = 0;
 
 const imagePaths = [
-  "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-  "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
-  "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-  "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
-  "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
-  "https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
-  "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"
+"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
+"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+"https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
+"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
+"https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
+"https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"
 ];
 
 const noTexts = [
-  "No",
-  "Are you sure?",
-  "Pookie please 🥺",
-  "Don't do this to me :(",
-  "You're breaking my heart 💔",
-  "I’m gonna cry...",
-  "Okay fine… will you be mine now?"
+"No",
+"Are you sure?",
+"Pookie please 🥺",
+"Don't do this to me :(",
+"You're breaking my heart 💔",
+"I’m gonna cry...",
+"Okay fine… will you be mine now?"
 ];
 
 noButton.addEventListener('click', () => {
@@ -34,7 +74,6 @@ noButton.addEventListener('click', () => {
     noClickCount++;
     imageDisplay.src = imagePaths[noClickCount];
     noButton.textContent = noTexts[noClickCount];
-
     yesButton.style.transform = `scale(${1 + noClickCount * 0.3})`;
   }
 });
@@ -46,3 +85,6 @@ yesButton.addEventListener('click', () => {
   confetti();
 });
 </script>
+
+</body>
+</html>
