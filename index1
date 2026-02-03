@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Will you be my Valentine?</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+  background: linear-gradient(180deg,#ffd0e5 0%,#ffe8f2 40%,#ffffff 100%);
+}
+.bounce { animation: bounce 2s infinite; }
+@keyframes bounce {
+  0%,20%,50%,80%,100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-8px); }
+}
+</style>
+</head>
+
+<body class="h-screen relative overflow-hidden">
+<div class="text-center">
+
+  <!-- ✅ YOUR FIRST IMAGE -->
+  <img id="imageDisplay"
+       src="image1.gif"
+       class="mx-auto rounded-lg h-[300px] object-cover bounce" />
+
+  <h2 id="valentineQuestion"
+      class="text-4xl font-bold italic text-pink-700 mt-6">
+      Will you be my Valentine?
+  </h2>
+
+  <div id="responseButtons" class="flex justify-center gap-6 mt-8">
+    <button id="yesButton"
+      class="bg-green-500 hover:bg-green-600 text-white text-xl px-8 py-3 rounded-lg transition">
+      Yes
+    </button>
+
+    <button id="noButton"
+      class="bg-red-500 hover:bg-red-600 text-white text-xl px-8 py-3 rounded-lg transition">
+      No
+    </button>
+  </div>
+
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesButton");
+const noBtn = document.getElementById("noButton");
+const img = document.getElementById("imageDisplay");
+const text = document.getElementById("valentineQuestion");
+const buttons = document.getElementById("responseButtons");
+
+let count = 0;
+
+const noImages = [
+  "noimage1.jpg",
+  "noimage2.jpg",
+  "noimage3.jpg",
+  "noimage4.jpg",
+  "noimage5.jpg",
+  "noimage6.jpg"
+];
+
+const yesImage1 = "yesimage1.jpg";
+
+const noTexts = [
+  "Are you sure?",
+  "Please reconsider 🥺",
+  "Don't break my heart 💔",
+  "I’m gonna cry...",
+  "Okay fine… think again?",
+  "Last chance 😢"
+];
+
+noBtn.addEventListener("click", () => {
+  if (count < noImages.length) {
+    img.src = noImages[count];
+    noBtn.textContent = noTexts[count];
+    yesBtn.style.transform = `scale(${1 + count * 0.25})`;
+    count++;
+  } else {
+    img.src = yesImage1;
+    text.textContent = "I knew you'd say yes! ❤️🥳";
+    buttons.style.display = "none";
+    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }});
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  img.src = yesImage1;
+  text.textContent = "Yayyyy!! ❤️🥳 Smart choice Bibin!";
+  buttons.style.display = "none";
+  confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }});
+});
+</script>
+noBtn.addEventListener("mouseover", () => {
+  const i = Math.floor(Math.random() * (window.innerWidth - 100));
+  const j = Math.floor(Math.random() * (window.innerHeight - 50));
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = i + "px";
+  noBtn.style.top = j + "px";
+});
+
+</body>
+</html>
