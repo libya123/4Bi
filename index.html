@@ -1,88 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Will you be my Valentine?</title>
 
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 body{
-  background: linear-gradient(180deg,#ffd0e5 0%,#ffe8f2 36%,#ffffff 100%);
+  background: linear-gradient(180deg,#ffd0e5 0%,#ffe8f2 40%,#ffffff 100%);
+}
+.bounce {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,20%,50%,80%,100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-8px); }
 }
 </style>
 </head>
 
 <body class="flex items-center justify-center h-screen">
 
-<div class="flex flex-col items-center">
+<div class="text-center">
   <img id="imageDisplay"
-  src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-  class="rounded-md h-[300px]"/>
+       src="https://i.imgur.com/8Km9tLL.gif"
+       class="mx-auto rounded-lg h-[300px] object-cover bounce" />
 
   <h2 id="valentineQuestion"
-  class="text-4xl font-bold italic text-[#bd1e59] my-4">
-  Will you be my Valentine?
+      class="text-4xl font-bold italic text-pink-700 mt-6">
+      Will you be my Valentine?
   </h2>
 
-  <div class="flex gap-4" id="responseButtons">
+  <div id="responseButtons" class="flex justify-center gap-6 mt-8">
     <button id="yesButton"
-    class="bg-green-500 text-white px-6 py-3 rounded-md text-xl">
-    Yes
+      class="bg-green-500 hover:bg-green-600 text-white text-xl px-8 py-3 rounded-lg transition">
+      Yes
     </button>
 
     <button id="noButton"
-    class="bg-red-500 text-white px-6 py-3 rounded-md text-xl">
-    No
+      class="bg-red-500 hover:bg-red-600 text-white text-xl px-8 py-3 rounded-lg transition">
+      No
     </button>
   </div>
 </div>
 
 <script>
-const yesButton = document.getElementById('yesButton');
-const noButton = document.getElementById('noButton');
-const imageDisplay = document.getElementById('imageDisplay');
-const valentineQuestion = document.getElementById('valentineQuestion');
-const responseButtons = document.getElementById('responseButtons');
+const yesBtn = document.getElementById("yesButton");
+const noBtn = document.getElementById("noButton");
+const img = document.getElementById("imageDisplay");
+const text = document.getElementById("valentineQuestion");
+const buttons = document.getElementById("responseButtons");
 
-let noClickCount = 0;
+let count = 0;
 
-const imagePaths = [
-"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-"https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
-"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
-"https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
-"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
-"https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif",
-"https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"
+const gifs = [
+  "https://i.imgur.com/8Km9tLL.gif",
+  "https://i.imgur.com/5ZQZ1ZP.gif",
+  "https://i.imgur.com/2RMzE3G.gif",
+  "https://i.imgur.com/j5q5Y8G.gif",
+  "https://i.imgur.com/7rlQxPz.gif",
+  "https://i.imgur.com/3GvwNBf.gif",
+  "https://i.imgur.com/9WfhR6v.gif"
 ];
 
 const noTexts = [
-"No",
-"Are you sure?",
-"Pookie please 🥺",
-"Don't do this to me :(",
-"You're breaking my heart 💔",
-"I’m gonna cry...",
-"Okay fine… will you be mine now?"
+  "No",
+  "Are you sure?",
+  "Please reconsider 🥺",
+  "Don't break my heart 💔",
+  "I’m gonna cry...",
+  "Okay fine… think again?",
+  "Last chance… will you be mine?"
 ];
 
-noButton.addEventListener('click', () => {
-  if (noClickCount < imagePaths.length - 1) {
-    noClickCount++;
-    imageDisplay.src = imagePaths[noClickCount];
-    noButton.textContent = noTexts[noClickCount];
-    yesButton.style.transform = `scale(${1 + noClickCount * 0.3})`;
+noBtn.addEventListener("click", () => {
+  if (count < gifs.length - 1) {
+    count++;
+    img.src = gifs[count];
+    noBtn.textContent = noTexts[count];
+    yesBtn.style.transform = `scale(${1 + count * 0.25})`;
   }
 });
 
-yesButton.addEventListener('click', () => {
-  imageDisplay.src = imagePaths[6];
-  valentineQuestion.textContent = "Yayyy!! ❤️";
-  responseButtons.style.display = 'none';
-  confetti();
+yesBtn.addEventListener("click", () => {
+  img.src = gifs[6];
+  text.textContent = "Yayyyy!! ❤️🥳Smart Choice Bibin";
+  buttons.style.display = "none";
+  confetti({
+    particleCount: 150,
+    spread: 80,
+    origin: { y: 0.6 }
+  });
 });
 </script>
 
